@@ -1,14 +1,19 @@
 <?php
 $empleados = [];
 $op_activas = true;
+$op_activas_register = true;
+$i = 0;
+function registrarEmpleado($empleados){
+    $nombre = readline("Ingrese el nombre del empleado: ");
+    $cargo = readline("Ingrese el cargo del empleado: ");
 
-function registrarEmpleado(){
-	$nombre = readline("Ingrese el nombre del empleado: ");
-	$empleados[] = $nombre;
+    $empleados[] = [
+		"id" => count($empleados) + 1,
+        "nombre" => $nombre,
+        "cargo" => $cargo
+    ];
 
-	$cargo = readline("Ingrese el cargo del empleado: ");
-	$empleados[] = $cargo;
-	return $empleados;
+    return $empleados;
 }
 
 while($op_activas){
@@ -30,14 +35,39 @@ while($op_activas){
 	switch($opcion){
 		case 1:
 
-			$empleados = registrarEmpleado();
+			while (true){
+				
+				$op_register_empleado = readline("¿ Desea registrar empleado ?  s/n: ");
+				
+				if ($op_register_empleado == "s" || $op_register_empleado == "S"){
+
+					$empleados = registrarEmpleado($empleados);
+				
+				}
+				
+				else if($op_register_empleado == "n" || $op_register_empleado == "N"){
+				
+					break;
+				
+				}
+				
+				else{
+				
+					echo "Opcion invalida";
+				
+				}
+
+
+			}
+
+
 			break;
 		case 2:
-			echo "hola";
-			echo count($empleados);
+		
 			foreach($empleados as $emple){
-				echo $emple;
+				echo $emple["id"] . " " . "nombre: ". $emple["nombre"] . " cargo: " .$emple["cargo"] ."\n";
 			}
+
 			break;
 		case 3:
 
@@ -71,12 +101,4 @@ while($op_activas){
 	}
 }
 
-
-
-
 ?>
-
-
-
-
-
