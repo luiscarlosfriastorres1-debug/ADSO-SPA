@@ -58,7 +58,7 @@ function mostrarCitas($citas){
 	}
 	else{
 		foreach($citas as $cita){
-			echo "Empleado: " . $cita["idEmpleado"] . " Cliente: " . $cita["cliente"] . " Dia: " . $cita["dia"] . " Hora: " . $cita["hora"] . "\n";
+			echo "Empleado: " . $cita["id_empleado"] . " Cliente: " . $cita["cliente"] . " Dia: " . $cita["dia"] . " Hora: " . $cita["hora"] . "\n";
 		}
 	}
 }
@@ -109,7 +109,7 @@ function registrarCita($empleados, $citas, $servicios, $dias_de_la_semana){
 		}
 
 		$citas[] = [
-			"idEmpleado" => $id_empleado,
+			"id_empleado" => $id_empleado,
 			"cliente" => $cliente,
 			"dia" => $dia,
 			"hora" => $hora
