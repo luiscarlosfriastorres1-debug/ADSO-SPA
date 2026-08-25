@@ -335,7 +335,7 @@ function agenda_de_un_dia(array $empleados, array $citas, array $dias_de_la_sema
 }
 
 
-function detectar_conflictos(array $empleados, array $citas) : array
+function detectar_conflictos(array $empleados, array $citas)
 {
     $hay_conflictos = false;
     $n = count($citas);
@@ -442,7 +442,7 @@ function liquidar_comisiones(array $empleados, array $citas)
 }
 
 
-function cargar_datos_de_prueba_dp(array $servicios, array $cargos_disponibles) : array
+function cargar_datos_de_prueba_dp(array $servicios, array $cargos_disponibles)
 {
 
 
