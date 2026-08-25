@@ -27,7 +27,7 @@ const BONIFICACION_BAJA = 0.08;
 const CITAS_MINIMAS_BONI = 6;
 const BONI_MEJOR_EMPLEAO = 50000;
 
-$datos_prueba_cargados = false;
+$es_datos_prueba_cargados = false;
 $servicios = [
     [
         "nombre" => "Limpieza facial",
@@ -145,7 +145,7 @@ function registrar_cita(array $empleados, array $citas, array $servicios, array 
 
     echo "Dias Disponibles: \n";
     foreach ($dias_de_la_semana as $dia) {
-        echo $dia . " " . "\n";
+        echo $dia . "\n";
     }
     echo "\n";
 
@@ -193,7 +193,7 @@ function registrar_cita(array $empleados, array $citas, array $servicios, array 
 }
 
 
-function total_facturado_por_empleado(array $empleados, array $citas): void
+function total_facturado_por_empleado(array $empleados, array $citas)
 {
     $totales = [];
 
@@ -233,7 +233,7 @@ function total_facturado_por_empleado(array $empleados, array $citas): void
 }
 
 
-function servicio_mas_solicitado(array $citas): void
+function servicio_mas_solicitado(array $citas)
 {
     $conteo = [];
 
@@ -278,7 +278,7 @@ function servicio_mas_solicitado(array $citas): void
 }
 
 
-function agenda_de_un_dia(array $empleados, array $citas, array $dias_de_la_semana): void
+function agenda_de_un_dia(array $empleados, array $citas, array $dias_de_la_semana)
 {
     echo "Dias Disponibles: ";
     foreach ($dias_de_la_semana as $dia) {
@@ -335,7 +335,7 @@ function agenda_de_un_dia(array $empleados, array $citas, array $dias_de_la_sema
 }
 
 
-function detectar_conflictos(array $empleados, array $citas): void
+function detectar_conflictos(array $empleados, array $citas)
 {
     $hay_conflictos = false;
     $n = count($citas);
@@ -388,7 +388,7 @@ function detectar_conflictos(array $empleados, array $citas): void
 }
 
 
-function liquidar_comisiones(array $empleados, array $citas): void
+function liquidar_comisiones(array $empleados, array $citas)
 {
     $resumen = [];
 
@@ -444,33 +444,151 @@ function liquidar_comisiones(array $empleados, array $citas): void
 
 function cargar_datos_prueba(array $servicios, array $cargos_disponibles): array
 {
+
+
     $empleados = [
-        ["id" => 1, "nombre" => "Ana Gomez", "cargo" => [$cargos_disponibles[0]]],
-        ["id" => 2, "nombre" => "Laura Diaz", "cargo" => [$cargos_disponibles[1], $cargos_disponibles[2]]],
-        ["id" => 3, "nombre" => "Carlos Ruiz", "cargo" => [$cargos_disponibles[3]]],
-        ["id" => 4, "nombre" => "Maria Perez", "cargo" => [$cargos_disponibles[4]]],
+        [
+			"id" => 1, 
+			"nombre" => "Luisca", 
+			"cargo" => [$cargos_disponibles[0]]
+		],
+        [
+			"id" => 2, 
+			"nombre" => "Luis Frias", 
+			"cargo" => [$cargos_disponibles[1], $cargos_disponibles[2]]
+		],
+        [
+			"id" => 3, 
+			"nombre" => "Luis Torres", 
+			"cargo" => [$cargos_disponibles[3]]
+		],
+        [
+			"id" => 4, 
+			"nombre" => "Dosa Prime", 
+			"cargo" => [$cargos_disponibles[4]]
+		],
     ];
 
     $citas = [
-        ["id_empleado" => 1, "cliente" => "Cliente 1",  "dia" => "lunes",     "hora" => 8,  "servicios" => [$servicios[0]]],
-        ["id_empleado" => 1, "cliente" => "Cliente 2",  "dia" => "lunes",     "hora" => 9,  "servicios" => [$servicios[1]]],
-        ["id_empleado" => 1, "cliente" => "Cliente 3",  "dia" => "martes",    "hora" => 8,  "servicios" => [$servicios[2]]],
-        ["id_empleado" => 1, "cliente" => "Cliente 4",  "dia" => "martes",    "hora" => 10, "servicios" => [$servicios[3], $servicios[5]]],
-        ["id_empleado" => 1, "cliente" => "Cliente 5",  "dia" => "miercoles", "hora" => 8,  "servicios" => [$servicios[6]]],
+        [
+			"id_empleado" => 1, 
+			"cliente" => "Cliente 1",  
+			"dia" => "lunes",     
+			"hora" => 8,  
+			"servicios" => [$servicios[0]]
+		],
+        [
+			"id_empleado" => 1, 
+			"cliente" => "Cliente 2",  
+			"dia" => "lunes",     
+			"hora" => 9,  
+			"servicios" => [$servicios[1]]
+		],
+        [
+			"id_empleado" => 1, 
+			"cliente" => "Cliente 3",  
+			"dia" => "martes",    
+			"hora" => 8,  
+			"servicios" => [$servicios[2]]
+		],
+        [
+			"id_empleado" => 1, 
+			"cliente" => "Cliente 4",  
+			"dia" => "martes",    
+			"hora" => 10, 
+			"servicios" => [$servicios[3], $servicios[5]]
+		],
+        [
+            "id_empleado" => 1, 
+            "cliente" => "Cliente 5",  
+            "dia" => "miercoles", 
+            "hora" => 8,  
+            "servicios" => [$servicios[6]]
+        ],
 
-        ["id_empleado" => 2, "cliente" => "Cliente 6",  "dia" => "lunes",     "hora" => 8,  "servicios" => [$servicios[1], $servicios[2]]],
-        ["id_empleado" => 2, "cliente" => "Cliente 7",  "dia" => "martes",    "hora" => 9,  "servicios" => [$servicios[4]]],
-        ["id_empleado" => 2, "cliente" => "Cliente 8",  "dia" => "miercoles", "hora" => 8,  "servicios" => [$servicios[0], $servicios[1]]],
-        ["id_empleado" => 2, "cliente" => "Cliente 9",  "dia" => "jueves",    "hora" => 8,  "servicios" => [$servicios[2]]],
+        [
+            "id_empleado" => 2, 
+            "cliente" => "Cliente 6",  
+            "dia" => "lunes",     
+            "hora" => 8,  
+            "servicios" => [$servicios[1], $servicios[2]]
+        ],
+        [
+            "id_empleado" => 2, 
+            "cliente" => "Cliente 7",  
+            "dia" => "martes",    
+            "hora" => 9,  
+            "servicios" => [$servicios[4]]
+        ],
+        [
+            "id_empleado" => 2, 
+            "cliente" => "Cliente 8",  
+            "dia" => "miercoles", 
+            "hora" => 8,  
+            "servicios" => [$servicios[0], $servicios[1]]
+        ],
+        [
+            "id_empleado" => 2, 
+            "cliente" => "Cliente 9",  
+            "dia" => "jueves",    
+            "hora" => 8,  
+            "servicios" => [$servicios[2]]
+        ],
 
-        ["id_empleado" => 3, "cliente" => "Cliente 10", "dia" => "lunes",     "hora" => 10, "servicios" => [$servicios[3]]],
-        ["id_empleado" => 3, "cliente" => "Cliente 11", "dia" => "martes",    "hora" => 8,  "servicios" => [$servicios[6], $servicios[1]]],
-        ["id_empleado" => 3, "cliente" => "Cliente 12", "dia" => "miercoles", "hora" => 9,  "servicios" => [$servicios[5]]],
+        [
+            "id_empleado" => 3, 
+            "cliente" => "Cliente 10", 
+            "dia" => "lunes",     
+            "hora" => 10, 
+            "servicios" => [$servicios[3]]
+        ],
+        [
+            "id_empleado" => 3, 
+            "cliente" => "Cliente 11", 
+            "dia" => "martes",    
+            "hora" => 8,  
+            "servicios" => [$servicios[6], $servicios[1]]
+        ],
+        [
+            "id_empleado" => 3, 
+            "cliente" => "Cliente 12", 
+            "dia" => "miercoles", 
+            "hora" => 9,  
+            "servicios" => [$servicios[5]]
+        ],
 
-        ["id_empleado" => 4, "cliente" => "Cliente 13", "dia" => "lunes",     "hora" => 8,  "servicios" => [$servicios[4]]],
-        ["id_empleado" => 4, "cliente" => "Cliente 14", "dia" => "martes",    "hora" => 8,  "servicios" => [$servicios[0], $servicios[2]]],
-        ["id_empleado" => 4, "cliente" => "Cliente 15", "dia" => "viernes",   "hora" => 8,  "servicios" => [$servicios[1]]],
+        [
+            "id_empleado" => 4, 
+            "cliente" => "Cliente 13", 
+            "dia" => "lunes",     
+            "hora" => 8,  
+            "servicios" => [$servicios[4]]
+        ],
+        [
+            "id_empleado" => 4, 
+            "cliente" => "Cliente 14", 
+            "dia" => "martes",    
+            "hora" => 8,  
+            "servicios" => [$servicios[0], $servicios[2]]
+        ],
+        [
+            "id_empleado" => 4, 
+            "cliente" => "Cliente 15", 
+            "dia" => "viernes",   
+            "hora" => 8,  
+            "servicios" => [$servicios[1]]
+        ],
     ];
+
+
+
+
+
+
+
+
+
+
 
     return [
         "empleados" => $empleados,
@@ -479,7 +597,7 @@ function cargar_datos_prueba(array $servicios, array $cargos_disponibles): array
 }
 
 
-function salida_programa(): void
+function salida_programa()
 {
     echo "Fue un placer tenerte aca, hasta luego !";
     exit;
@@ -508,7 +626,7 @@ while ($es_activa) {
 
     switch ($opcion) {
         case 1:
-            if ($datos_prueba_cargados == true) {
+            if ($es_datos_prueba_cargados == true) {
                 echo "Los datos de prueba ya fueron cargados. \n";
             } 
             else {
@@ -517,7 +635,7 @@ while ($es_activa) {
             
             break;
         case 2:
-            if ($datos_prueba_cargados == true) {
+            if ($es_datos_prueba_cargados == true) {
                 echo "Los datos de prueba ya fueron cargados. \n";
             } 
             else {
@@ -544,14 +662,14 @@ while ($es_activa) {
             salida_programa();
             break;
         case "dp":
-            if ($datos_prueba_cargados == true) {
+            if ($es_datos_prueba_cargados == true) {
                 echo "Los datos de prueba ya fueron cargados. \n";
             } else {
                 $datos = cargar_datos_prueba($servicios, $cargos_dispo);
                 $empleados = $datos["empleados"];
                 $citas = $datos["citas"];
-                $datos_prueba_cargados = true;
-                echo "Datos de prueba cargados exitosamente. \n";
+                $es_datos_prueba_cargados = true;
+                echo "Datos de prueba cargados correctamente... \n";
             }
             break;
         default:
