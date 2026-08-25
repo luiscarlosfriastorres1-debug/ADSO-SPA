@@ -335,7 +335,7 @@ function agenda_de_un_dia(array $empleados, array $citas, array $dias_de_la_sema
 }
 
 
-function detectar_conflictos(array $empleados, array $citas)
+function detectar_conflictos(array $empleados, array $citas) : array
 {
     $hay_conflictos = false;
     $n = count($citas);
@@ -442,7 +442,7 @@ function liquidar_comisiones(array $empleados, array $citas)
 }
 
 
-function cargar_datos_prueba(array $servicios, array $cargos_disponibles): array
+function cargar_datos_de_prueba_dp(array $servicios, array $cargos_disponibles) : array
 {
 
 
@@ -580,16 +580,6 @@ function cargar_datos_prueba(array $servicios, array $cargos_disponibles): array
         ],
     ];
 
-
-
-
-
-
-
-
-
-
-
     return [
         "empleados" => $empleados,
         "citas" => $citas,
@@ -664,8 +654,9 @@ while ($es_activa) {
         case "dp":
             if ($es_datos_prueba_cargados == true) {
                 echo "Los datos de prueba ya fueron cargados. \n";
-            } else {
-                $datos = cargar_datos_prueba($servicios, $cargos_dispo);
+            } 
+            else {
+                $datos = cargar_datos_de_prueba_dp($servicios, $cargos_dispo);
                 $empleados = $datos["empleados"];
                 $citas = $datos["citas"];
                 $es_datos_prueba_cargados = true;
